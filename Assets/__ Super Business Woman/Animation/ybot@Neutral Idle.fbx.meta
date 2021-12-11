@@ -1,44 +1,11 @@
 fileFormatVersion: 2
-guid: 56f76ece4ad7c134391864ca4e0d1bb4
+guid: d5e2a0311baf8ae43b9a27107be48e00
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
-      74: -1559071518392153964
-    second: Armature|Cube.001Action
-  - first:
-      74: 5449073193131188545
-    second: Armature|CubeAction
-  - first:
-      74: 783080663221867442
-    second: Armature|CubeAction.001
-  - first:
-      74: 6755636440131579798
-    second: Armature|CubeAction.002
-  - first:
-      74: -6061105779773282926
-    second: Armature|CubeAction.003
-  - first:
-      74: -2671727989249149643
-    second: 'Armature|Walk '
-  - first:
-      74: -4488152711070085318
-    second: Body.001|Cube.001Action
-  - first:
-      74: 4351249291318472184
-    second: Body.001|CubeAction
-  - first:
-      74: -6465896538960198339
-    second: Body.001|CubeAction.001
-  - first:
-      74: -7303936658833861500
-    second: Body.001|CubeAction.002
-  - first:
-      74: 4270392474666618051
-    second: Body.001|CubeAction.003
-  - first:
-      74: -7418275897847877196
-    second: 'Body.001|Walk '
+      74: -203655887218126122
+    second: Neutral Idle
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -59,14 +26,43 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Neutral Idle
+      takeName: mixamo.com
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 263
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -124,13 +120,13 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
-  animationType: 2
+  animationType: 3
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   additionalBone: 0
   userData: 
