@@ -599,7 +599,7 @@ PlayerSettings:
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
     1: DREAMTECK_SPLINES
-    7: DREAMTECK_SPLINES
+    7: DREAMTECK_SPLINES;MOREMOUNTAINS_FEEDBACKS;MOREMOUNTAINS_NICEVIBRATIONS;MOREMOUNTAINS_TOOLS
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:

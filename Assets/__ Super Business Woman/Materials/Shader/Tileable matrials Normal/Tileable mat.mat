@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Tileable mat
+  m_Shader: {fileID: -6465566751694194690, guid: 6e5c39ea400e51d4db6f23096c66a038, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_377e1c2b3f6343ff8baff029a77cb7c1:
+        m_Texture: {fileID: 2800000, guid: 50c171a736ebd2041bed6e4921efe5f3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_3c4707d165364331a7851b598acd64e0:
+        m_Texture: {fileID: 2800000, guid: bf7061845fb449548826d41e40fcb964, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_4753f9f42b334ea5aa5041dc43a7c750:
+        m_Texture: {fileID: 2800000, guid: ae8c419ca3f44e949adf6d2099dbea97, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_5ea00c2dd9bb4d81a37a17cfc0c3aab2:
+        m_Texture: {fileID: 2800000, guid: c7bdd37b454a27947ae1169292323dc8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_744b5d69d1c943b8b2647225f28b0c84:
+        m_Texture: {fileID: 2800000, guid: 50c171a736ebd2041bed6e4921efe5f3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_d82239b1d2a843bd8136a60aa4f8322b: 0.1
+    m_Colors: []
+  m_BuildTextureStacks: []
