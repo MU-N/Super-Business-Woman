@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Dreamteck.Splines;
+using MoreMountains.NiceVibrations;
 
 namespace Nasser.SBW.Core
 {
@@ -11,15 +13,20 @@ namespace Nasser.SBW.Core
 
         [SerializeField] private float speed = 0.5f, computerSpeed, dir = -1f;
         [SerializeField] private float mapWidth = 2.5f;
+        [SerializeField] private ParticleSystem gateEffect;
 
 
         private bool touching = false;
+        private bool firstTouch = false;
 
 
         private float positionX, positionY;
 
+        private int animIsWalking;
+
         private Vector3 originPos;
 
+        private SplineFollower splineFollower;
         private Rigidbody rb;
         private Animator animator;
 
@@ -28,9 +35,13 @@ namespace Nasser.SBW.Core
         {
             //Initializations
             rb = GetComponent<Rigidbody>();
+            animator = GetComponent<Animator>();    
+            splineFollower = GetComponentInParent<SplineFollower>();
             positionX = 0f;
             positionY = transform.localPosition.y;
             originPos = transform.localPosition;
+            splineFollower.follow = false;
+            animIsWalking = Animator.StringToHash("isWalk");
         }
 
         void Update()
@@ -39,13 +50,19 @@ namespace Nasser.SBW.Core
             {
                 if (touch.phase == TouchPhase.Began)        //if finger touches the screen
                 {
+                    if(!firstTouch)
+                    {
+                        splineFollower.follow = true;
+                        animator.SetBool(animIsWalking, true);
+                        firstTouch = true;
+                    }
                     if (touching == false)
                     {
                         touching = true;
                         initTouch = touch;
                     }
                 }
-                else if (touch.phase == TouchPhase.Moved)       //if finger moves while touching the screen
+                else if (touch.phase == TouchPhase.Moved )       //if finger moves while touching the screen
                 {
                     float deltaX = initTouch.position.x - touch.position.x;
                     positionX -= deltaX * Time.deltaTime * speed * dir;

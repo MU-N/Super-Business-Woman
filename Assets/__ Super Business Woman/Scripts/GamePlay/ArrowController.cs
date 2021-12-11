@@ -7,6 +7,7 @@ namespace Nasser.SBW
 {
     public class ArrowController : MonoBehaviour,IIntercatable
     {
+        // 0 for green 1 for red
         [SerializeField] int arrowIndex;
         [SerializeField] ParticleSystem ps;
         public void Interact()
