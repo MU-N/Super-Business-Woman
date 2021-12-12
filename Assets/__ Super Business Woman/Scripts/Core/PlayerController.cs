@@ -99,8 +99,10 @@ namespace Nasser.SBW.Core
 
         public void PlayGateParticleEffect()
         {
+            LeanTween.move(gateEffect[0].gameObject,new Vector3( transform.position.x , transform.position.y+2 , transform.position.z), 1f).setLoopPingPong().setLoopOnce() ;
             foreach (var item in gateEffect)
             {
+                
                 item.GetComponent<ParticleSystem>().Play();
                 foreach (Transform item2 in item.transform)
                 {

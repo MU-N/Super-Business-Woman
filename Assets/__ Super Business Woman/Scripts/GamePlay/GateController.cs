@@ -10,7 +10,8 @@ namespace Nasser.SBW
         [SerializeField] GameEvent gameEvent;
         public void Interact()
         {
-            gameEvent.Raise();  
+            gameEvent.Raise();
+            Debug.Log("raised");
         }
 
         
