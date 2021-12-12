@@ -13,7 +13,7 @@ namespace Nasser.SBW.Core
 
         [SerializeField] private float speed = 0.5f, computerSpeed, dir = -1f;
         [SerializeField] private float mapWidth = 2.5f;
-        [SerializeField] private ParticleSystem gateEffect;
+        [SerializeField] private ParticleSystem []gateEffect;
 
 
         private bool touching = false;
@@ -31,6 +31,8 @@ namespace Nasser.SBW.Core
         private Animator animator;
 
         private Touch initTouch = new Touch();
+
+        WaitForSeconds waitFor125ms = new WaitForSeconds(1.25f);
         void Start()
         {
             //Initializations
@@ -92,6 +94,42 @@ namespace Nasser.SBW.Core
             var interactable = other.GetComponent<IIntercatable>();
             if (interactable == null) return;
             interactable.Interact();
+            
         }
+
+        public void PlayGateParticleEffect()
+        {
+            foreach (var item in gateEffect)
+            {
+                item.GetComponent<ParticleSystem>().Play();
+                foreach (Transform item2 in item.transform)
+                {
+                    item2.GetComponent<ParticleSystem>().Play();
+                }
+            }
+            StartCoroutine(nameof(WaitFor75ms));
+        }
+
+        private void StopGateParticleEffect()
+        {
+            foreach (var item in gateEffect)
+            {
+                item.GetComponent<ParticleSystem>().Stop();
+                foreach (Transform item2 in item.transform)
+                {
+                    item2.GetComponent<ParticleSystem>().Stop();
+                }
+            }
+        }
+
+
+        IEnumerator WaitFor75ms()
+        {
+            yield return waitFor125ms;
+            StopGateParticleEffect();
+        }
+
+
+
     }
 }

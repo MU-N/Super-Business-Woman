@@ -7,10 +7,10 @@ namespace Nasser.SBW
 {
     public class GateController : MonoBehaviour, IIntercatable
     {
-        [SerializeField] ParticleSystem ps;    
+        [SerializeField] GameEvent gameEvent;
         public void Interact()
         {
-            ps.Play();
+            gameEvent.Raise();  
         }
 
         
