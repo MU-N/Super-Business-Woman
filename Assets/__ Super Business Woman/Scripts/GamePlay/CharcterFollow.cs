@@ -8,8 +8,8 @@ namespace Nasser.SBW
     public class CharcterFollow : MonoBehaviour, IIntercatable
     {
         [SerializeField] Transform followLocation;
-        [SerializeField] float moveSpeed;
-        private bool isFollow;
+        [HideInInspector] public  Transform myParent;
+
 
         Animator animator;
         private int animIsWalk;
@@ -18,23 +18,31 @@ namespace Nasser.SBW
         {
             animator = GetComponent<Animator>();
             animIsWalk = Animator.StringToHash("isWalk");
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            if (!isFollow) return;
-
-            animator.SetBool(animIsWalk, true);
-            transform.position = Vector3.Slerp(transform.position, followLocation.position, Time.deltaTime * moveSpeed);
-            transform.rotation = Quaternion.Slerp(transform.rotation, followLocation.rotation, Time.deltaTime * moveSpeed);
-
+            myParent = transform.parent;
         }
 
         public void Interact()
         {
-
-            isFollow = true;
+            if(followLocation.childCount > 0)
+            {
+                followLocation.GetChild(0).gameObject.SetActive(false);
+                followLocation.GetChild(0).parent = followLocation.GetChild(0).GetComponent<CharcterFollow>().myParent;
+                
+            }
+            transform.position = followLocation.position;
+            transform.rotation = followLocation.rotation;
+            transform.parent = followLocation;
+            animator.SetBool(animIsWalk,true);
         }
     }
+
+
+
+    // todo add gui 
+    // todo add sound 
+    // todo add investment 
+    // todo add arrows 
+    // todo add finsih effect 
+    // todo add player  slider
+    // 
 }

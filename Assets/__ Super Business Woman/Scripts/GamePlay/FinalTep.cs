@@ -5,15 +5,14 @@ using Nasser.SBW.Core;
 
 namespace Nasser.SBW
 {
-    public class GateController : MonoBehaviour, IIntercatable
+    public class FinalTep : MonoBehaviour,IIntercatable
     {
         [SerializeField] GameEvent gameEvent;
         public void Interact()
         {
             gameEvent.Raise();
-            
         }
 
-        
+       
     }
 }

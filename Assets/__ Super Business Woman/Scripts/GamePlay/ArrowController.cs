@@ -9,10 +9,18 @@ namespace Nasser.SBW
     {
         // 0 for green 1 for red
         [SerializeField] int arrowIndex;
+         MeshRenderer  mesh;
         [SerializeField] ParticleSystem ps;
+
+        private void Start()
+        {
+                mesh = GetComponent<MeshRenderer>();
+        }
         public void Interact()
         {
-            
+            ps.Play();
+            mesh.enabled = false;
+            Debug.Log("Interact");
         }
 
         

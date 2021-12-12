@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 195826, guid: 67fe2ef032cc2cd448054758131542f7, type: 3}
       propertyPath: m_Name
-      value: DollarbillFountain
+      value: DollarbillFountain Variant
       objectReference: {fileID: 0}
     - target: {fileID: 408764, guid: 67fe2ef032cc2cd448054758131542f7, type: 3}
       propertyPath: m_RootOrder
@@ -53,6 +53,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 408764, guid: 67fe2ef032cc2cd448054758131542f7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19866620, guid: 67fe2ef032cc2cd448054758131542f7, type: 3}
+      propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19904194, guid: 67fe2ef032cc2cd448054758131542f7, type: 3}

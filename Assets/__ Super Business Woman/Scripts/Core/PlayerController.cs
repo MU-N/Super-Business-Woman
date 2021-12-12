@@ -32,7 +32,8 @@ namespace Nasser.SBW.Core
 
         private Touch initTouch = new Touch();
 
-        WaitForSeconds waitFor125ms = new WaitForSeconds(1.25f);
+        WaitForSeconds waitFor50ms = new WaitForSeconds(.5f);
+        WaitForSeconds waitFor150ms = new WaitForSeconds(1.5f);
         void Start()
         {
             //Initializations
@@ -99,10 +100,15 @@ namespace Nasser.SBW.Core
 
         public void PlayGateParticleEffect()
         {
-            LeanTween.move(gateEffect[0].gameObject,new Vector3( transform.position.x , transform.position.y+2 , transform.position.z), 1f).setLoopPingPong().setLoopOnce() ;
+            StartCoroutine(nameof(WaitForPlayms));
+        }
+
+        private void PlayEffect()
+        {
+            LeanTween.moveLocalY(gateEffect[1].gameObject, 1.65f, .75f).setLoopPingPong();
             foreach (var item in gateEffect)
             {
-                
+
                 item.GetComponent<ParticleSystem>().Play();
                 foreach (Transform item2 in item.transform)
                 {
@@ -124,11 +130,22 @@ namespace Nasser.SBW.Core
             }
         }
 
+        public void win()
+        {
+            splineFollower.follow = false;
+            animator.SetBool(animIsWalking, false);
+        }
+
 
         IEnumerator WaitFor75ms()
         {
-            yield return waitFor125ms;
+            yield return waitFor150ms;
             StopGateParticleEffect();
+        }
+        IEnumerator WaitForPlayms()
+        {
+            yield return waitFor50ms;
+            PlayEffect();
         }
 
 
