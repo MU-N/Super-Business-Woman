@@ -44,7 +44,6 @@ namespace Nasser.SBW.Core
         private SplineFollower splineFollower;
         private Rigidbody rb;
         [SerializeField] private Animator [] animator;
-        private Animator currentAnimator;
 
         private Touch initTouch = new Touch();
 
@@ -56,7 +55,6 @@ namespace Nasser.SBW.Core
             rb = GetComponent<Rigidbody>();
             
             splineFollower = GetComponentInParent<SplineFollower>();
-            currentAnimator = animator[currentGirlVisualIndex];
             positionX = 0f;
             positionY = transform.localPosition.y;
             originPos = transform.localPosition;
@@ -91,7 +89,8 @@ namespace Nasser.SBW.Core
                         if (!firstTouch)
                         {
                             splineFollower.follow = true;
-                            currentAnimator.SetBool(animIsWalking, true);
+                            animator[0].SetBool(animIsWalking, true);
+                            animator[1].SetBool(animIsWalking, true);
                             firstTouch = true;
                         }
                         if (touching == false)
@@ -181,7 +180,8 @@ namespace Nasser.SBW.Core
                 else
                     girlVisuals[i].SetActive(false);
             }
-            currentAnimator.SetBool(animIsWalking, true);
+            animator[0].SetBool(animIsWalking, true);
+            animator[1].SetBool(animIsWalking, true);
 
 
         }
@@ -219,7 +219,8 @@ namespace Nasser.SBW.Core
         public void win()
         {
             splineFollower.follow = false;
-            currentAnimator.SetBool(animIsWin, true);
+            animator[0].SetBool(animIsWin, true);
+            animator[1].SetBool(animIsWin, true);
             isWinBool = true;
             //LeanTween.rotateY(transform.GetChild(0).gameObject, 360.0f, 1.0f).setRepeat(1);
             //LeanTween.rotateAround(gameObject, Vector3.up, 360, 2.5f).setLoopClamp().setLoopOnce() ;
