@@ -14,7 +14,11 @@ namespace Nasser.SBW.Core
 
         [SerializeField] private float speed = 0.5f, computerSpeed, dir = -1f;
         [SerializeField] private float mapWidth = 2.5f;
-        [SerializeField] private ParticleSystem []gateEffect;
+        [Header("Visuals")]
+        [SerializeField] private GameObject[] girlVisuals;
+
+        [Header("Effects")]
+        [SerializeField] private ParticleSystem[] gateEffect;
         [Header("Slider")]
         [SerializeField] private Slider playerSlider;
         [SerializeField] private float maxSliderAmount;
@@ -23,17 +27,24 @@ namespace Nasser.SBW.Core
 
         private bool touching = false;
         private bool firstTouch = false;
+        private bool isWinBool = false;
 
 
         private float positionX, positionY;
 
+        private int currentGirlVisualIndex = 0;
+
+
         private int animIsWalking;
+        private int animIsWin;
+        private int animIsLose;
 
         private Vector3 originPos;
 
         private SplineFollower splineFollower;
         private Rigidbody rb;
-        private Animator animator;
+        [SerializeField] private Animator [] animator;
+        private Animator currentAnimator;
 
         private Touch initTouch = new Touch();
 
@@ -43,47 +54,65 @@ namespace Nasser.SBW.Core
         {
             //Initializations
             rb = GetComponent<Rigidbody>();
-            animator = GetComponent<Animator>();    
+            
             splineFollower = GetComponentInParent<SplineFollower>();
+            currentAnimator = animator[currentGirlVisualIndex];
             positionX = 0f;
             positionY = transform.localPosition.y;
             originPos = transform.localPosition;
+
             splineFollower.follow = false;
+
             animIsWalking = Animator.StringToHash("isWalk");
+            animIsWin = Animator.StringToHash("isWin");
+            animIsLose = Animator.StringToHash("isLose");
+
             currentSliderAmount = 0;
+            currentGirlVisualIndex = 0;
+
             playerSlider.value = currentSliderAmount;
+            for (int i = 0; i < 2; i++)
+            {
+                if (i == currentGirlVisualIndex)
+                    girlVisuals[i].SetActive(true);
+                else
+                    girlVisuals[i].SetActive(false);
+            }
         }
 
         void Update()
         {
-            foreach (Touch touch in Input.touches)
+            if (!isWinBool)
             {
-                if (touch.phase == TouchPhase.Began)        //if finger touches the screen
+                foreach (Touch touch in Input.touches)
                 {
-                    if(!firstTouch)
+                    if (touch.phase == TouchPhase.Began)        //if finger touches the screen
                     {
-                        splineFollower.follow = true;
-                        animator.SetBool(animIsWalking, true);
-                        firstTouch = true;
+                        if (!firstTouch)
+                        {
+                            splineFollower.follow = true;
+                            currentAnimator.SetBool(animIsWalking, true);
+                            firstTouch = true;
+                        }
+                        if (touching == false)
+                        {
+                            touching = true;
+                            initTouch = touch;
+                        }
                     }
-                    if (touching == false)
+                    else if (touch.phase == TouchPhase.Moved)       //if finger moves while touching the screen
                     {
-                        touching = true;
+                        float deltaX = initTouch.position.x - touch.position.x;
+                        positionX -= deltaX * Time.deltaTime * speed * dir;
+                        positionX = Mathf.Clamp(positionX, -mapWidth, mapWidth);      //to set the boundaries of the player's position
+                        transform.localPosition = new Vector3(positionX, positionY, 0f);
                         initTouch = touch;
                     }
-                }
-                else if (touch.phase == TouchPhase.Moved )       //if finger moves while touching the screen
-                {
-                    float deltaX = initTouch.position.x - touch.position.x;
-                    positionX -= deltaX * Time.deltaTime * speed * dir;
-                    positionX = Mathf.Clamp(positionX, -mapWidth, mapWidth);      //to set the boundaries of the player's position
-                    transform.localPosition = new Vector3(positionX, positionY, 0f);
-                    initTouch = touch;
-                }
-                else if (touch.phase == TouchPhase.Ended)       //if finger releases the screen
-                {
-                    initTouch = new Touch();
-                    touching = false;
+                    else if (touch.phase == TouchPhase.Ended)       //if finger releases the screen
+                    {
+                        initTouch = new Touch();
+                        touching = false;
+                    }
                 }
             }
 
@@ -102,7 +131,7 @@ namespace Nasser.SBW.Core
             var interactable = other.GetComponent<IIntercatable>();
             if (interactable == null) return;
             interactable.Interact();
-            
+
         }
 
         public void PlayGateParticleEffect()
@@ -138,9 +167,29 @@ namespace Nasser.SBW.Core
             }
         }
 
+        private void CheckForCurrentGirlVisual()
+        {
+            if(currentSliderAmount>=50)
+                currentGirlVisualIndex = 1;
+            else
+                currentGirlVisualIndex = 0;
+
+            for (int i = 0; i < 2; i++)
+            {
+                if (i == currentGirlVisualIndex)
+                    girlVisuals[i].SetActive(true);
+                else
+                    girlVisuals[i].SetActive(false);
+            }
+            currentAnimator.SetBool(animIsWalking, true);
+
+
+        }
         private void UpdateSlider()
         {
             playerSlider.value = currentSliderAmount / maxSliderAmount;
+            CheckForCurrentGirlVisual();
+
         }
 
         public void Add5Points()
@@ -170,16 +219,18 @@ namespace Nasser.SBW.Core
         public void win()
         {
             splineFollower.follow = false;
-            animator.SetBool(animIsWalking, false);
+            currentAnimator.SetBool(animIsWin, true);
+            isWinBool = true;
             //LeanTween.rotateY(transform.GetChild(0).gameObject, 360.0f, 1.0f).setRepeat(1);
-            LeanTween.rotateAround(gameObject, Vector3.up, 360, 2.5f).setLoopClamp().setLoopOnce() ;
+            //LeanTween.rotateAround(gameObject, Vector3.up, 360, 2.5f).setLoopClamp().setLoopOnce() ;
         }
 
         [ContextMenu("Rotate")]
         public void TakeBusiness()
         {
             //LeanTween.rotateY(transform.GetChild(0).gameObject, 360.0f, 1.0f).setRepeat(1);
-            LeanTween.rotateAround(gameObject, Vector3.up, 360, 2.5f).setLoopClamp().setLoopOnce();
+            LeanTween.rotateAround(girlVisuals[0], Vector3.up, 360, 1f).setLoopClamp().setLoopOnce();
+            LeanTween.rotateAround(girlVisuals[1], Vector3.up, 360, 1f).setLoopClamp().setLoopOnce();
 
         }
 

@@ -27,7 +27,7 @@ namespace Nasser.SBW
             if (arrowIndex == 0)
                 upArrow.Raise();
             else
-                upArrow.Raise();
+                downArrow.Raise();
 
         }
 

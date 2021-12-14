@@ -8,11 +8,13 @@ namespace Nasser.SBW
     public class FinishController : MonoBehaviour,IIntercatable
     {
        [SerializeField] ParticleSystem [] _particleSystem;
+       [SerializeField] GameEvent reachFinish;
 
 
 
         public void Interact()
         {
+            reachFinish.Raise();
             foreach (var item in _particleSystem)
             {
 
