@@ -9,8 +9,12 @@ namespace Nasser.SBW
     {
         // 0 for green 1 for red
         [SerializeField] int arrowIndex;
-         MeshRenderer  mesh;
+         
         [SerializeField] ParticleSystem ps;
+        [SerializeField] GameEvent upArrow;
+        [SerializeField] GameEvent downArrow;
+
+        MeshRenderer mesh;
 
         private void Start()
         {
@@ -20,7 +24,11 @@ namespace Nasser.SBW
         {
             ps.Play();
             mesh.enabled = false;
-            Debug.Log("Interact");
+            if (arrowIndex == 0)
+                upArrow.Raise();
+            else
+                upArrow.Raise();
+
         }
 
         

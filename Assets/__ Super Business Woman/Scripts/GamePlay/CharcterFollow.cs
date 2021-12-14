@@ -7,8 +7,12 @@ namespace Nasser.SBW
 {
     public class CharcterFollow : MonoBehaviour, IIntercatable
     {
+        // 0 businesx 1 boy
         [SerializeField] Transform followLocation;
-        [HideInInspector] public  Transform myParent;
+        [HideInInspector] public Transform myParent;
+        [SerializeField] private int index;
+        [SerializeField] private GameEvent business;
+        [SerializeField] private GameEvent boy;
 
 
         Animator animator;
@@ -23,16 +27,20 @@ namespace Nasser.SBW
 
         public void Interact()
         {
-            if(followLocation.childCount > 0)
+            if (followLocation.childCount > 0)
             {
                 followLocation.GetChild(0).gameObject.SetActive(false);
                 followLocation.GetChild(0).parent = followLocation.GetChild(0).GetComponent<CharcterFollow>().myParent;
-                
+
             }
             transform.position = followLocation.position;
             transform.rotation = followLocation.rotation;
             transform.parent = followLocation;
-            animator.SetBool(animIsWalk,true);
+            animator.SetBool(animIsWalk, true);
+            if (index == 0)
+                business.Raise();
+            else
+                boy.Raise();
         }
     }
 

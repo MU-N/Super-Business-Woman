@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Dreamteck.Splines;
 using MoreMountains.NiceVibrations;
+using UnityEngine.UI;
 
 namespace Nasser.SBW.Core
 {
@@ -14,6 +15,10 @@ namespace Nasser.SBW.Core
         [SerializeField] private float speed = 0.5f, computerSpeed, dir = -1f;
         [SerializeField] private float mapWidth = 2.5f;
         [SerializeField] private ParticleSystem []gateEffect;
+        [Header("Slider")]
+        [SerializeField] private Slider playerSlider;
+        [SerializeField] private float maxSliderAmount;
+        private float currentSliderAmount;
 
 
         private bool touching = false;
@@ -45,6 +50,8 @@ namespace Nasser.SBW.Core
             originPos = transform.localPosition;
             splineFollower.follow = false;
             animIsWalking = Animator.StringToHash("isWalk");
+            currentSliderAmount = 0;
+            playerSlider.value = currentSliderAmount;
         }
 
         void Update()
@@ -123,6 +130,7 @@ namespace Nasser.SBW.Core
             foreach (var item in gateEffect)
             {
                 item.GetComponent<ParticleSystem>().Stop();
+                item.transform.position = transform.position;
                 foreach (Transform item2 in item.transform)
                 {
                     item2.GetComponent<ParticleSystem>().Stop();
@@ -130,10 +138,49 @@ namespace Nasser.SBW.Core
             }
         }
 
+        private void UpdateSlider()
+        {
+            playerSlider.value = currentSliderAmount / maxSliderAmount;
+        }
+
+        public void Add5Points()
+        {
+            currentSliderAmount += 5;
+            UpdateSlider();
+        }
+
+        public void Add10Points()
+        {
+            currentSliderAmount += 10;
+            UpdateSlider();
+        }
+
+        public void Sub5Points()
+        {
+            currentSliderAmount -= 5;
+            UpdateSlider();
+        }
+
+        public void Sub10Points()
+        {
+            currentSliderAmount -= 10;
+            UpdateSlider();
+        }
+
         public void win()
         {
             splineFollower.follow = false;
             animator.SetBool(animIsWalking, false);
+            //LeanTween.rotateY(transform.GetChild(0).gameObject, 360.0f, 1.0f).setRepeat(1);
+            LeanTween.rotateAround(gameObject, Vector3.up, 360, 2.5f).setLoopClamp().setLoopOnce() ;
+        }
+
+        [ContextMenu("Rotate")]
+        public void TakeBusiness()
+        {
+            //LeanTween.rotateY(transform.GetChild(0).gameObject, 360.0f, 1.0f).setRepeat(1);
+            LeanTween.rotateAround(gameObject, Vector3.up, 360, 2.5f).setLoopClamp().setLoopOnce();
+
         }
 
 
