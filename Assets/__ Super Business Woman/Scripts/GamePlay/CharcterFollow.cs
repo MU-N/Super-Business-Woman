@@ -31,7 +31,6 @@ namespace Nasser.SBW
             {
                 followLocation.GetChild(0).gameObject.SetActive(false);
                 followLocation.GetChild(0).parent = followLocation.GetChild(0).GetComponent<CharcterFollow>().myParent;
-
             }
             transform.position = followLocation.position;
             transform.rotation = followLocation.rotation;
