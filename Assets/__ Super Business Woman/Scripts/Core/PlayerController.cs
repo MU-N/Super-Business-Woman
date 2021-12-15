@@ -43,7 +43,7 @@ namespace Nasser.SBW.Core
 
         private SplineFollower splineFollower;
         private Rigidbody rb;
-        [SerializeField] private Animator [] animator;
+        [SerializeField] private Animator[] animator;
 
         private Touch initTouch = new Touch();
 
@@ -53,7 +53,7 @@ namespace Nasser.SBW.Core
         {
             //Initializations
             rb = GetComponent<Rigidbody>();
-            
+
             splineFollower = GetComponentInParent<SplineFollower>();
             positionX = 0f;
             positionY = transform.localPosition.y;
@@ -158,20 +158,38 @@ namespace Nasser.SBW.Core
             foreach (var item in gateEffect)
             {
                 item.GetComponent<ParticleSystem>().Stop();
-                item.transform.position = transform.position;
+
                 foreach (Transform item2 in item.transform)
                 {
                     item2.GetComponent<ParticleSystem>().Stop();
                 }
+
+                item.transform.localPosition = transform.position;
             }
         }
 
         private void CheckForCurrentGirlVisual()
         {
-            if(currentSliderAmount>=50)
+            if (currentSliderAmount >= 50)
+            {
+                if (currentGirlVisualIndex == 0)
+                {
+                    PlayEffect();
+                    TakeBusiness();
+                }
                 currentGirlVisualIndex = 1;
+
+
+            }
             else
+            {
+                if (currentGirlVisualIndex == 1)
+                {
+                    PlayEffect();
+                    TakeBusiness();
+                }
                 currentGirlVisualIndex = 0;
+            }
 
             for (int i = 0; i < 2; i++)
             {
@@ -230,12 +248,22 @@ namespace Nasser.SBW.Core
         public void TakeBusiness()
         {
             //LeanTween.rotateY(transform.GetChild(0).gameObject, 360.0f, 1.0f).setRepeat(1);
-            LeanTween.rotateAround(girlVisuals[0], Vector3.up, 360, 1f).setLoopClamp().setLoopOnce();
-            LeanTween.rotateAround(girlVisuals[1], Vector3.up, 360, 1f).setLoopClamp().setLoopOnce();
+            LeanTween.rotateAround(girlVisuals[0], Vector3.up, 360, 0.75f).setLoopClamp().setLoopOnce();
+            LeanTween.rotateAround(girlVisuals[1], Vector3.up, 360, .75f).setLoopClamp().setLoopOnce();
+            LeanTween.scale(girlVisuals[0], new Vector3(1.15f, 1.15f, 1.15f), .5f);
+            LeanTween.scale(girlVisuals[1], new Vector3(1.15f, 1.15f, 1.15f), .5f);
+
+            StartCoroutine(nameof(ScaleDown));
 
         }
 
 
+        IEnumerator ScaleDown()
+        {
+            yield return waitFor50ms;
+            LeanTween.scale(girlVisuals[0], new Vector3(1f, 1f, 1f), .5f);
+            LeanTween.scale(girlVisuals[1], new Vector3(1f, 1f, 1f), .5f);
+        }
         IEnumerator WaitFor75ms()
         {
             yield return waitFor150ms;
