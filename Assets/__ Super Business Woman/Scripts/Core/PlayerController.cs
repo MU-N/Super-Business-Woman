@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Dreamteck.Splines;
 using MoreMountains.NiceVibrations;
 using UnityEngine.UI;
 
@@ -41,7 +40,7 @@ namespace Nasser.SBW.Core
 
         private Vector3 originPos;
 
-        private SplineFollower splineFollower;
+        //private SplineFollower splineFollower;
         private Rigidbody rb;
         [SerializeField] private Animator[] animator;
 
@@ -54,12 +53,12 @@ namespace Nasser.SBW.Core
             //Initializations
             rb = GetComponent<Rigidbody>();
 
-            splineFollower = GetComponentInParent<SplineFollower>();
+         //   splineFollower = GetComponentInParent<SplineFollower>();
             positionX = 0f;
             positionY = transform.localPosition.y;
             originPos = transform.localPosition;
 
-            splineFollower.follow = false;
+         //   splineFollower.follow = false;
 
             animIsWalking = Animator.StringToHash("isWalk");
             animIsWin = Animator.StringToHash("isWin");
@@ -88,7 +87,7 @@ namespace Nasser.SBW.Core
                     {
                         if (!firstTouch)
                         {
-                            splineFollower.follow = true;
+                         //   splineFollower.follow = true;
                             animator[0].SetBool(animIsWalking, true);
                             animator[1].SetBool(animIsWalking, true);
                             firstTouch = true;
@@ -236,7 +235,7 @@ namespace Nasser.SBW.Core
 
         public void win()
         {
-            splineFollower.follow = false;
+           // splineFollower.follow = false;
             animator[0].SetBool(animIsWin, true);
             animator[1].SetBool(animIsWin, true);
             isWinBool = true;
