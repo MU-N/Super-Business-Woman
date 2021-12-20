@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MoreMountains.NiceVibrations;
 using UnityEngine.UI;
+using PathCreation.Examples;
 
 namespace Nasser.SBW.Core
 {
@@ -30,6 +31,8 @@ namespace Nasser.SBW.Core
 
 
         private float positionX, positionY;
+        private float defultSpeed;
+        
 
         private int currentGirlVisualIndex = 0;
 
@@ -40,7 +43,7 @@ namespace Nasser.SBW.Core
 
         private Vector3 originPos;
 
-        //private SplineFollower splineFollower;
+        private PathFollower pathFollower;
         private Rigidbody rb;
         [SerializeField] private Animator[] animator;
 
@@ -53,12 +56,13 @@ namespace Nasser.SBW.Core
             //Initializations
             rb = GetComponent<Rigidbody>();
 
-         //   splineFollower = GetComponentInParent<SplineFollower>();
+            pathFollower = GetComponentInParent<PathFollower>();
+            defultSpeed = pathFollower.speed;
             positionX = 0f;
             positionY = transform.localPosition.y;
             originPos = transform.localPosition;
 
-         //   splineFollower.follow = false;
+            pathFollower.speed = 0;
 
             animIsWalking = Animator.StringToHash("isWalk");
             animIsWin = Animator.StringToHash("isWin");
@@ -87,7 +91,7 @@ namespace Nasser.SBW.Core
                     {
                         if (!firstTouch)
                         {
-                         //   splineFollower.follow = true;
+                           pathFollower.speed = defultSpeed;
                             animator[0].SetBool(animIsWalking, true);
                             animator[1].SetBool(animIsWalking, true);
                             firstTouch = true;
@@ -103,7 +107,7 @@ namespace Nasser.SBW.Core
                         float deltaX = initTouch.position.x - touch.position.x;
                         positionX -= deltaX * Time.deltaTime * speed * dir;
                         positionX = Mathf.Clamp(positionX, -mapWidth, mapWidth);      //to set the boundaries of the player's position
-                        transform.localPosition = new Vector3(positionX, positionY, 0f);
+                        transform.localPosition = new Vector3(positionY, positionX, 0f);
                         initTouch = touch;
                     }
                     else if (touch.phase == TouchPhase.Ended)       //if finger releases the screen
@@ -235,20 +239,14 @@ namespace Nasser.SBW.Core
 
         public void win()
         {
-           // splineFollower.follow = false;
+            pathFollower.speed = 0;
             animator[0].SetBool(animIsWin, true);
             animator[1].SetBool(animIsWin, true);
             isWinBool = true;
-            //LeanTween.rotateY(transform.GetChild(0).gameObject, 360.0f, 1.0f).setRepeat(1);
-            //LeanTween.rotateAround(gameObject, Vector3.up, 360, 2.5f).setLoopClamp().setLoopOnce() ;
         }
 
-        [ContextMenu("Rotate")]
         public void TakeBusiness()
         {
-            //LeanTween.rotateY(transform.GetChild(0).gameObject, 360.0f, 1.0f).setRepeat(1);
-            LeanTween.rotateAround(girlVisuals[0], Vector3.up, 360, 0.75f).setLoopClamp().setLoopOnce();
-            LeanTween.rotateAround(girlVisuals[1], Vector3.up, 360, .75f).setLoopClamp().setLoopOnce();
             LeanTween.scale(girlVisuals[0], new Vector3(1.15f, 1.15f, 1.15f), .5f);
             LeanTween.scale(girlVisuals[1], new Vector3(1.15f, 1.15f, 1.15f), .5f);
 
