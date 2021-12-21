@@ -209,6 +209,7 @@ namespace Nasser.SBW.Core
         private void UpdateSlider()
         {
             playerSlider.value = currentSliderAmount / maxSliderAmount;
+            playerSlider.transform.GetChild(0).GetChild(0).GetComponent<Image>().color = Color.Lerp(Color.red, Color.green,playerSlider.value);
             CheckForCurrentGirlVisual();
 
         }
