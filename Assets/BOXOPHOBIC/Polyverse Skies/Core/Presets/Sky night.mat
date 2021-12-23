@@ -156,7 +156,7 @@ Material:
     m_Floats:
     - _BackgroundCat: 1
     - _BackgroundCubemapSpace: 0
-    - _BackgroundExposure: 1
+    - _BackgroundExposure: 0
     - _BackgroundMode: 0
     - _Banner: 1
     - _BumpScale: 1

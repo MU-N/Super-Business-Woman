@@ -12,13 +12,13 @@ namespace Nasser.SBW.Core
         
         private void Start()
         {
-            //transform.DOLocalRotate(rotationTraget, 1).SetEase(Ease.InSine).SetLoops(-1);
+            transform.DORotate(rotationTraget, 2.5F, RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart);
         }
         [ContextMenu("InterAct")]
         public void Interact()
         {
 
-            transform.DORotate(rotationTraget, 2.5F,RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1,LoopType.Restart);
+            
         }
 
        
