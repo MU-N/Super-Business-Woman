@@ -75,18 +75,20 @@ namespace Nasser.SBW.Core
             if (ind == 0)
             {
                 if (currentState)
-                    musicMixer.audioMixer.SetFloat("MusicVol", -15);
+                    musicMixer.audioMixer.SetFloat("SoundVol", 0);
                 else
-                    musicMixer.audioMixer.SetFloat("MusicVol", -80);
+                    musicMixer.audioMixer.SetFloat("SoundVol", -80);
             }
 
             else if (ind == 1)
             {
                 if (currentState)
-                    audioMixer.audioMixer.SetFloat("AudioVol", 0);
+                    audioMixer.audioMixer.SetFloat("MusicVol", -15);
                 else
-                    audioMixer.audioMixer.SetFloat("AudioVol", -80);
+                    audioMixer.audioMixer.SetFloat("MusicVol", -80);
             }
         }
     }
+
+    
 }

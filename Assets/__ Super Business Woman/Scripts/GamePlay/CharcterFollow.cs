@@ -45,11 +45,8 @@ namespace Nasser.SBW
 
 
 
-    // todo add gui 
-    // todo add sound 
     // todo add investment 
     // todo add arrows 
     // todo add finsih effect 
-    // todo add player  slider
-    // 
+    // todo : Add ui manager
 }
