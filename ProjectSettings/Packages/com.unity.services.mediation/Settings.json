@@ -11,7 +11,7 @@
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "admob-adapter.version",
-                "value": "{\"m_Value\":\"latest\"}"
+                "value": "{\"m_Value\":\"\"}"
             },
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
@@ -41,7 +41,7 @@
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "admob-adapter.app-id.android",
-                "value": "{\"m_Value\":\"ca-app-pub-2913977132774893~1642315813\"}"
+                "value": "{\"m_Value\":\"\"}"
             },
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",

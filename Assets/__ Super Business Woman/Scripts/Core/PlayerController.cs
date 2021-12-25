@@ -22,6 +22,9 @@ namespace Nasser.SBW.Core
         [Header("Slider")]
         [SerializeField] private Slider playerSlider;
         [SerializeField] private float maxSliderAmount;
+
+        [Header("First Event")]
+        [SerializeField] private GameEvent firstTouchEvent;
         private float currentSliderAmount;
 
 
@@ -95,6 +98,7 @@ namespace Nasser.SBW.Core
                             animator[0].SetBool(animIsWalking, true);
                             animator[1].SetBool(animIsWalking, true);
                             firstTouch = true;
+                            firstTouchEvent.Raise();
                         }
                         if (touching == false)
                         {

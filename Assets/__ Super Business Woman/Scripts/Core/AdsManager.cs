@@ -37,9 +37,9 @@ string gameId = "4520814";
         public void PlayRewardedAds( Action onSuccess)
         {
             onRewardedAdsSuccess = onSuccess;
-            if (Advertisement.IsReady("Interstitial_Android"))
+            if (Advertisement.IsReady("Rewarded_Android"))
             {
-                Advertisement.Show("Interstitial_Android");
+                Advertisement.Show("Rewarded_Android");
             }
             else
             {
