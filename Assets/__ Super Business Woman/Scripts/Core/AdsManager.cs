@@ -28,18 +28,18 @@ string gameId = "4520814";
 
         public void PlayInterstitialAds()
         {
-            if (Advertisement.IsReady("Interstitial"))
+            if (Advertisement.IsReady("Interstitial_Android"))
             {
-                Advertisement.Show("Interstitial");
+                Advertisement.Show("Interstitial_Android");
             }
         }
 
         public void PlayRewardedAds( Action onSuccess)
         {
             onRewardedAdsSuccess = onSuccess;
-            if (Advertisement.IsReady("Rewarded"))
+            if (Advertisement.IsReady("Interstitial_Android"))
             {
-                Advertisement.Show("Rewarded");
+                Advertisement.Show("Interstitial_Android");
             }
             else
             {
@@ -49,10 +49,10 @@ string gameId = "4520814";
 
         public void PlayBannerAds()
         {
-            if (Advertisement.IsReady("Banner"))
+            if (Advertisement.IsReady("Banner_Android"))
             {
                 Advertisement.Banner.SetPosition(BannerPosition.BOTTOM_CENTER);
-                Advertisement.Banner.Show("Banner");
+                Advertisement.Banner.Show("Banner_Android");
             }
             else
             {
@@ -100,5 +100,7 @@ string gameId = "4520814";
                 onRewardedAdsSuccess.Invoke();  
             }
         }
+
+
     }
 }
