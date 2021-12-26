@@ -22,12 +22,12 @@ namespace Nasser.SBW
         private void Start()
         {
             mesh = GetComponent<MeshRenderer>();
-            transform.DORotate(targetRotation, 1F, RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart);
+            transform.DORotate(targetRotation, 1.75f, RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart);
         }
         public void Interact()
         {
-            ps.Play();
-            transform.DOScale(new Vector3(0,0,0), 1F).SetEase(Ease.InBounce).SetLoops(1);
+            //ps.Play();
+            transform.DOScale(new Vector3(0,0,0), .2F).SetEase(Ease.InBounce).SetLoops(1);
             if (arrowIndex == 0)
                 upArrow.Raise();
             else
