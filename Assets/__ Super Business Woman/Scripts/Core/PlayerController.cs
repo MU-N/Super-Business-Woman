@@ -4,6 +4,7 @@ using UnityEngine;
 using MoreMountains.NiceVibrations;
 using UnityEngine.UI;
 using PathCreation.Examples;
+using DG.Tweening;
 
 namespace Nasser.SBW.Core
 {
@@ -53,7 +54,7 @@ namespace Nasser.SBW.Core
         private Touch initTouch = new Touch();
 
         WaitForSeconds waitFor50ms = new WaitForSeconds(.5f);
-        WaitForSeconds waitFor150ms = new WaitForSeconds(1.5f);
+        WaitForSeconds waitFor150ms = new WaitForSeconds(2.5f);
         void Start()
         {
             //Initializations
@@ -147,7 +148,7 @@ namespace Nasser.SBW.Core
 
         private void PlayEffect()
         {
-            LeanTween.moveLocalY(gateEffect[1].gameObject, 1.65f, .75f).setLoopPingPong();
+           
             foreach (var item in gateEffect)
             {
 
@@ -252,20 +253,15 @@ namespace Nasser.SBW.Core
 
         public void TakeBusiness()
         {
-            LeanTween.scale(girlVisuals[0], new Vector3(1.15f, 1.15f, 1.15f), .5f);
-            LeanTween.scale(girlVisuals[1], new Vector3(1.15f, 1.15f, 1.15f), .5f);
+            girlVisuals[0].transform.DORotate(new Vector3(0,360+90,0), 1F, RotateMode.FastBeyond360).SetEase(Ease.InOutSine).SetLoops(1);
+            girlVisuals[0].transform.DORotate(new Vector3(0, 360+90, 0), 1F, RotateMode.FastBeyond360).SetEase(Ease.InOutSine).SetLoops(1);
 
-            StartCoroutine(nameof(ScaleDown));
+            
 
         }
 
 
-        IEnumerator ScaleDown()
-        {
-            yield return waitFor50ms;
-            LeanTween.scale(girlVisuals[0], new Vector3(1f, 1f, 1f), .5f);
-            LeanTween.scale(girlVisuals[1], new Vector3(1f, 1f, 1f), .5f);
-        }
+        
         IEnumerator WaitFor75ms()
         {
             yield return waitFor150ms;

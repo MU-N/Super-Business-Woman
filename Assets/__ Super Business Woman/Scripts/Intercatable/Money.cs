@@ -12,7 +12,7 @@ namespace Nasser.SBW.Core
         
         private void Start()
         {
-            transform.DORotate(rotationTraget, 2.5F, RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart);
+            transform.DORotate(rotationTraget, 1F, RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart);
         }
         [ContextMenu("InterAct")]
         public void Interact()
