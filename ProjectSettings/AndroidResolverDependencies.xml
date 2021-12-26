@@ -1,15 +1,13 @@
 <dependencies>
   <packages>
-    <package>com.unity3d.mediation:admob-adapter:[0.3,0.4[</package>
     <package>com.unity3d.mediation:mediation-sdk:[0.3,0.4[</package>
     <package>com.unity3d.mediation:unityads-adapter:[0.3,0.4[</package>
   </packages>
   <files>
     <file>Assets/Plugins/Android/androidx.annotation.annotation-1.2.0.jar</file>
-    <file>Assets/Plugins/Android/androidx.arch.core.core-common-2.0.1.jar</file>
-    <file>Assets/Plugins/Android/androidx.arch.core.core-runtime-2.0.1.aar</file>
+    <file>Assets/Plugins/Android/androidx.arch.core.core-common-2.0.0.jar</file>
+    <file>Assets/Plugins/Android/androidx.arch.core.core-runtime-2.0.0.aar</file>
     <file>Assets/Plugins/Android/androidx.asynclayoutinflater.asynclayoutinflater-1.0.0.aar</file>
-    <file>Assets/Plugins/Android/androidx.browser.browser-1.0.0.aar</file>
     <file>Assets/Plugins/Android/androidx.collection.collection-1.0.0.jar</file>
     <file>Assets/Plugins/Android/androidx.coordinatorlayout.coordinatorlayout-1.0.0.aar</file>
     <file>Assets/Plugins/Android/androidx.core.core-1.2.0.aar</file>
@@ -25,31 +23,17 @@
     <file>Assets/Plugins/Android/androidx.lifecycle.lifecycle-livedata-2.0.0.aar</file>
     <file>Assets/Plugins/Android/androidx.lifecycle.lifecycle-livedata-core-2.0.0.aar</file>
     <file>Assets/Plugins/Android/androidx.lifecycle.lifecycle-runtime-2.0.0.aar</file>
-    <file>Assets/Plugins/Android/androidx.lifecycle.lifecycle-service-2.0.0.aar</file>
     <file>Assets/Plugins/Android/androidx.lifecycle.lifecycle-viewmodel-2.0.0.aar</file>
     <file>Assets/Plugins/Android/androidx.loader.loader-1.0.0.aar</file>
     <file>Assets/Plugins/Android/androidx.localbroadcastmanager.localbroadcastmanager-1.0.0.aar</file>
     <file>Assets/Plugins/Android/androidx.print.print-1.0.0.aar</file>
-    <file>Assets/Plugins/Android/androidx.room.room-common-2.1.0.jar</file>
-    <file>Assets/Plugins/Android/androidx.room.room-runtime-2.1.0.aar</file>
     <file>Assets/Plugins/Android/androidx.slidingpanelayout.slidingpanelayout-1.0.0.aar</file>
-    <file>Assets/Plugins/Android/androidx.sqlite.sqlite-2.0.1.aar</file>
-    <file>Assets/Plugins/Android/androidx.sqlite.sqlite-framework-2.0.1.aar</file>
     <file>Assets/Plugins/Android/androidx.startup.startup-runtime-1.0.0.aar</file>
     <file>Assets/Plugins/Android/androidx.swiperefreshlayout.swiperefreshlayout-1.0.0.aar</file>
     <file>Assets/Plugins/Android/androidx.tracing.tracing-1.0.0.aar</file>
     <file>Assets/Plugins/Android/androidx.versionedparcelable.versionedparcelable-1.1.0.aar</file>
     <file>Assets/Plugins/Android/androidx.viewpager.viewpager-1.0.0.aar</file>
-    <file>Assets/Plugins/Android/androidx.work.work-runtime-2.1.0.aar</file>
-    <file>Assets/Plugins/Android/com.google.android.gms.play-services-ads-20.3.0.aar</file>
-    <file>Assets/Plugins/Android/com.google.android.gms.play-services-ads-base-20.3.0.aar</file>
-    <file>Assets/Plugins/Android/com.google.android.gms.play-services-ads-identifier-17.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.google.android.gms.play-services-ads-lite-20.3.0.aar</file>
     <file>Assets/Plugins/Android/com.google.android.gms.play-services-basement-17.6.0.aar</file>
-    <file>Assets/Plugins/Android/com.google.android.gms.play-services-measurement-base-18.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.google.android.gms.play-services-measurement-sdk-api-18.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.google.android.gms.play-services-tasks-17.0.0.aar</file>
-    <file>Assets/Plugins/Android/com.google.android.ump.user-messaging-platform-1.0.0.aar</file>
     <file>Assets/Plugins/Android/com.google.code.findbugs.jsr305-3.0.2.jar</file>
     <file>Assets/Plugins/Android/com.google.code.gson.gson-2.8.6.jar</file>
     <file>Assets/Plugins/Android/com.google.errorprone.error_prone_annotations-2.3.3.jar</file>
@@ -62,7 +46,6 @@
     <file>Assets/Plugins/Android/com.squareup.okhttp3.okhttp-4.6.0.jar</file>
     <file>Assets/Plugins/Android/com.squareup.okio.okio-2.6.0.jar</file>
     <file>Assets/Plugins/Android/com.unity3d.ads.unity-ads-3.7.5.aar</file>
-    <file>Assets/Plugins/Android/com.unity3d.mediation.admob-adapter-0.3.0.aar</file>
     <file>Assets/Plugins/Android/com.unity3d.mediation.mediation-sdk-0.3.0.aar</file>
     <file>Assets/Plugins/Android/com.unity3d.mediation.unityads-adapter-0.3.0.aar</file>
     <file>Assets/Plugins/Android/org.checkerframework.checker-compat-qual-2.5.5.jar</file>
