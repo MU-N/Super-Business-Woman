@@ -27,7 +27,10 @@ namespace Nasser.SBW
         public void Interact()
         {
             //ps.Play();
-            transform.DOScale(new Vector3(0,0,0), .2F).SetEase(Ease.InBounce).SetLoops(1);
+            transform.DOScale(transform.localScale * 2, 0.1f).SetEase(Ease.InOutBounce).SetLoops(1).OnComplete(() =>
+            {
+                transform.DOScale(new Vector3(0, 0, 0), 0.1f).SetEase(Ease.InBounce).SetLoops(1);
+            });
             if (arrowIndex == 0)
                 upArrow.Raise();
             else

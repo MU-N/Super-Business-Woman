@@ -17,8 +17,11 @@ namespace Nasser.SBW.Core
         [ContextMenu("InterAct")]
         public void Interact()
         {
-
-            transform.DOScale(new Vector3(0, 0, 0), 0.2f).SetEase(Ease.InBounce).SetLoops(1);
+            transform.DOScale(transform.localScale * 2, 0.1f).SetEase(Ease.InOutBounce).SetLoops(1).OnComplete(() =>
+            {
+                transform.DOScale(new Vector3(0, 0, 0), 0.1f).SetEase(Ease.InBounce).SetLoops(1);
+            });
+            
         }
 
        

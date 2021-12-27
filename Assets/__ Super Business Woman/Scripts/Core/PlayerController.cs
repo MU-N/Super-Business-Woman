@@ -16,13 +16,19 @@ namespace Nasser.SBW.Core
         [SerializeField] private float speed = 0.5f, computerSpeed, dir = -1f;
         [SerializeField] private float mapWidth = 2.5f;
         [Header("Visuals")]
-        [SerializeField] private GameObject[] girlVisuals;
+        [SerializeField] private GameObject girlVisual;
+
 
         [Header("Effects")]
         [SerializeField] private ParticleSystem[] gateEffect;
         [Header("Slider")]
         [SerializeField] private Slider playerSlider;
         [SerializeField] private float maxSliderAmount;
+
+        [Header("Texures")]
+        [SerializeField] Texture[] m_MainTexture;
+        [SerializeField] Renderer[] m_Renderer;
+        private int texureIndex;
 
         [Header("First Event")]
         [SerializeField] private GameEvent firstTouchEvent;
@@ -36,7 +42,7 @@ namespace Nasser.SBW.Core
 
         private float positionX, positionY;
         private float defultSpeed;
-        
+
 
         private int currentGirlVisualIndex = 0;
 
@@ -49,17 +55,17 @@ namespace Nasser.SBW.Core
 
         private PathFollower pathFollower;
         private Rigidbody rb;
-        [SerializeField] private Animator[] animator;
+        private Animator animator;
 
         private Touch initTouch = new Touch();
 
         WaitForSeconds waitFor50ms = new WaitForSeconds(.5f);
-        WaitForSeconds waitFor150ms = new WaitForSeconds(2.5f);
+        WaitForSeconds waitFor150ms = new WaitForSeconds(1.5f);
         void Start()
         {
             //Initializations
             rb = GetComponent<Rigidbody>();
-
+            animator = GetComponentInChildren<Animator>();
             pathFollower = GetComponentInParent<PathFollower>();
             defultSpeed = pathFollower.speed;
             positionX = 0f;
@@ -76,13 +82,11 @@ namespace Nasser.SBW.Core
             currentGirlVisualIndex = 0;
 
             playerSlider.value = currentSliderAmount;
-            for (int i = 0; i < 2; i++)
-            {
-                if (i == currentGirlVisualIndex)
-                    girlVisuals[i].SetActive(true);
-                else
-                    girlVisuals[i].SetActive(false);
-            }
+            
+
+            texureIndex = 1;    
+            ChangeTexture(texureIndex);
+
         }
 
         void Update()
@@ -95,9 +99,8 @@ namespace Nasser.SBW.Core
                     {
                         if (!firstTouch)
                         {
-                           pathFollower.speed = defultSpeed;
-                            animator[0].SetBool(animIsWalking, true);
-                            animator[1].SetBool(animIsWalking, true);
+                            pathFollower.speed = defultSpeed;
+                            animator.SetBool(animIsWalking, true);
                             firstTouch = true;
                             firstTouchEvent.Raise();
                         }
@@ -124,13 +127,25 @@ namespace Nasser.SBW.Core
             }
 
             //if you play on computer---------------------------------
-            float x = Input.GetAxis("Horizontal") * Time.deltaTime * computerSpeed;     //you can move by pressing 'a' - 'd' or the arrow keys
+            float x = Input.GetAxis("Horizontal") * Time.deltaTime * computerSpeed;
             Vector3 newPosition = rb.transform.localPosition + Vector3.right * x;
             newPosition.x = Mathf.Clamp(newPosition.x, -mapWidth, mapWidth);
             transform.localPosition = newPosition;
-            //--------------------------------------------------------
         }
 
+
+
+
+
+
+
+        //------------------
+        private void ChangeTexture( int index)
+        {
+
+            m_Renderer[0].material.SetTexture("_BaseMap", m_MainTexture[index]);
+            m_Renderer[1].material.SetTexture("_BaseMap", m_MainTexture[index]);
+        }
 
         // ------------- 
         private void OnTriggerEnter(Collider other)
@@ -148,7 +163,7 @@ namespace Nasser.SBW.Core
 
         private void PlayEffect()
         {
-           
+
             foreach (var item in gateEffect)
             {
 
@@ -199,22 +214,13 @@ namespace Nasser.SBW.Core
                 currentGirlVisualIndex = 0;
             }
 
-            for (int i = 0; i < 2; i++)
-            {
-                if (i == currentGirlVisualIndex)
-                    girlVisuals[i].SetActive(true);
-                else
-                    girlVisuals[i].SetActive(false);
-            }
-            animator[0].SetBool(animIsWalking, true);
-            animator[1].SetBool(animIsWalking, true);
-
+            animator.SetBool(animIsWalking, true);
 
         }
         private void UpdateSlider()
         {
             playerSlider.value = currentSliderAmount / maxSliderAmount;
-            playerSlider.transform.GetChild(0).GetChild(0).GetComponent<Image>().color = Color.Lerp(Color.red, Color.green,playerSlider.value);
+            playerSlider.transform.GetChild(0).GetChild(0).GetComponent<Image>().color = Color.Lerp(Color.red, Color.green, playerSlider.value);
             CheckForCurrentGirlVisual();
 
         }
@@ -246,25 +252,20 @@ namespace Nasser.SBW.Core
         public void win()
         {
             pathFollower.speed = 0;
-            animator[0].SetBool(animIsWin, true);
-            animator[1].SetBool(animIsWin, true);
+            animator.SetBool(animIsWin, true);
             isWinBool = true;
         }
 
         public void TakeBusiness()
         {
-            girlVisuals[0].transform.DORotate(new Vector3(0,360+90,0), 1F, RotateMode.FastBeyond360).SetEase(Ease.InOutSine).SetLoops(1);
-            girlVisuals[0].transform.DORotate(new Vector3(0, 360+90, 0), 1F, RotateMode.FastBeyond360).SetEase(Ease.InOutSine).SetLoops(1);
-
-            
-
+            girlVisual.transform.DORotate(new Vector3(0, 360 + 90, 0), 1F, RotateMode.FastBeyond360).SetEase(Ease.OutBounce).SetLoops(1);
         }
 
 
-        
+
         IEnumerator WaitFor75ms()
         {
-            yield return waitFor150ms;
+            yield return waitFor50ms;
             StopGateParticleEffect();
         }
         IEnumerator WaitForPlayms()
