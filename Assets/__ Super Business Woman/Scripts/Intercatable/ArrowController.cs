@@ -8,12 +8,7 @@ namespace Nasser.SBW
 {
     public class ArrowController : MonoBehaviour, IIntercatable
     {
-        // 0 for green 1 for red
-        [SerializeField] int arrowIndex;
-
-        [SerializeField] ParticleSystem ps;
-        [SerializeField] GameEvent upArrow;
-        [SerializeField] GameEvent downArrow;
+        [SerializeField] GameEvent downGrade;
         [SerializeField] Vector3 targetRotation;
 
 
@@ -26,15 +21,11 @@ namespace Nasser.SBW
         }
         public void Interact()
         {
-            //ps.Play();
+            downGrade.Raise();
             transform.DOScale(transform.localScale * 2, 0.1f).SetEase(Ease.InOutBounce).SetLoops(1).OnComplete(() =>
             {
                 transform.DOScale(new Vector3(0, 0, 0), 0.1f).SetEase(Ease.InBounce).SetLoops(1);
             });
-            if (arrowIndex == 0)
-                upArrow.Raise();
-            else
-                downArrow.Raise();
 
         }
 

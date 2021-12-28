@@ -121,6 +121,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2430593095201538529}
     m_Modifications:
+    - target: {fileID: 1678460460, guid: 9092d77cf5372e144b7bc780a9d31b5e, type: 3}
+      propertyPath: upGrade
+      value: 
+      objectReference: {fileID: 11400000, guid: 2008b17ac7821c04e867aa4b26457aef, type: 2}
     - target: {fileID: 314044732395669001, guid: 9092d77cf5372e144b7bc780a9d31b5e, type: 3}
       propertyPath: m_Name
       value: Money

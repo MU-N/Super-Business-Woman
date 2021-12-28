@@ -44,12 +44,10 @@ namespace Nasser.SBW.Core
         private float defultSpeed;
 
 
-        private int currentGirlVisualIndex = 0;
-
-
         private int animIsWalking;
         private int animIsWin;
         private int animIsLose;
+        private int tempTextureIndex;
 
         private Vector3 originPos;
 
@@ -79,13 +77,12 @@ namespace Nasser.SBW.Core
             animIsLose = Animator.StringToHash("isLose");
 
             currentSliderAmount = 0;
-            currentGirlVisualIndex = 0;
 
             playerSlider.value = currentSliderAmount;
-            
 
-            texureIndex = 1;    
-            ChangeTexture(texureIndex);
+
+            texureIndex = 0;
+            UpdateTexture(texureIndex);
 
         }
 
@@ -135,19 +132,13 @@ namespace Nasser.SBW.Core
 
 
 
-
-
-
-
-        //------------------
-        private void ChangeTexture( int index)
+        private void UpdateTexture(int index)
         {
 
             m_Renderer[0].material.SetTexture("_BaseMap", m_MainTexture[index]);
             m_Renderer[1].material.SetTexture("_BaseMap", m_MainTexture[index]);
         }
 
-        // ------------- 
         private void OnTriggerEnter(Collider other)
         {
             var interactable = other.GetComponent<IIntercatable>();
@@ -186,35 +177,27 @@ namespace Nasser.SBW.Core
                 {
                     item2.GetComponent<ParticleSystem>().Stop();
                 }
-
-                item.transform.localPosition = transform.position;
             }
         }
 
         private void CheckForCurrentGirlVisual()
         {
-            if (currentSliderAmount >= 50)
+             tempTextureIndex = texureIndex;
+            if (currentSliderAmount < 25)
+                texureIndex = 0;
+            else if (currentSliderAmount < 50 && currentSliderAmount > 25)
+                texureIndex = 1;
+            else if (currentSliderAmount < 75 && currentSliderAmount > 50)
+                texureIndex = 2;
+            else if (currentSliderAmount <= 100 && currentSliderAmount > 75)
+                texureIndex = 3;
+
+            UpdateTexture(texureIndex);
+            if (tempTextureIndex != texureIndex)
             {
-                if (currentGirlVisualIndex == 0)
-                {
-                    PlayEffect();
-                    TakeBusiness();
-                }
-                currentGirlVisualIndex = 1;
-
-
+                VisualyUpdateRotaion();
+                PlayEffect();
             }
-            else
-            {
-                if (currentGirlVisualIndex == 1)
-                {
-                    PlayEffect();
-                    TakeBusiness();
-                }
-                currentGirlVisualIndex = 0;
-            }
-
-            animator.SetBool(animIsWalking, true);
 
         }
         private void UpdateSlider()
@@ -227,25 +210,37 @@ namespace Nasser.SBW.Core
 
         public void Add5Points()
         {
-            currentSliderAmount += 5;
+            if (currentSliderAmount < 100)
+                currentSliderAmount += 2;
+            else
+                currentSliderAmount = 100;
             UpdateSlider();
         }
 
         public void Add10Points()
         {
-            currentSliderAmount += 10;
+            if (currentSliderAmount < 100)
+                currentSliderAmount += 5;
+            else
+                currentSliderAmount = 100;
             UpdateSlider();
         }
 
         public void Sub5Points()
         {
-            currentSliderAmount -= 5;
+            if (currentSliderAmount > 0)
+                currentSliderAmount -= 2;
+            else
+                currentSliderAmount = 0;
             UpdateSlider();
         }
 
         public void Sub10Points()
         {
-            currentSliderAmount -= 10;
+            if (currentSliderAmount > 0)
+                currentSliderAmount -= 5;
+            else
+                currentSliderAmount = 0;
             UpdateSlider();
         }
 
@@ -256,16 +251,16 @@ namespace Nasser.SBW.Core
             isWinBool = true;
         }
 
-        public void TakeBusiness()
+        public void VisualyUpdateRotaion()
         {
-            girlVisual.transform.DORotate(new Vector3(0, 360 + 90, 0), 1F, RotateMode.FastBeyond360).SetEase(Ease.OutBounce).SetLoops(1);
+            girlVisual.transform.DORotate(new Vector3(0, 360 + 90, 0), 1F, RotateMode.FastBeyond360).SetEase(Ease.InOutSine).SetLoops(1);
         }
 
 
 
         IEnumerator WaitFor75ms()
         {
-            yield return waitFor50ms;
+            yield return waitFor150ms;
             StopGateParticleEffect();
         }
         IEnumerator WaitForPlayms()

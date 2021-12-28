@@ -36,12 +36,10 @@ namespace Nasser.SBW.UI
         }
         public void OnWin()
         {
-            Time.timeScale = 0;
         }
 
         public void OnLose()
         {
-            Time.timeScale = 0;
             adsManager.PlayInterstitialAds();
         }
 

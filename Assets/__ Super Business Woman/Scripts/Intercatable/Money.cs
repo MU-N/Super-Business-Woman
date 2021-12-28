@@ -9,6 +9,7 @@ namespace Nasser.SBW.Core
     public class Money : MonoBehaviour,IIntercatable
     {
         [SerializeField] private Vector3 rotationTraget;
+        [SerializeField] private GameEvent upGrade;
         
         private void Start()
         {
@@ -17,6 +18,8 @@ namespace Nasser.SBW.Core
         [ContextMenu("InterAct")]
         public void Interact()
         {
+            upGrade.Raise();
+
             transform.DOScale(transform.localScale * 2, 0.1f).SetEase(Ease.InOutBounce).SetLoops(1).OnComplete(() =>
             {
                 transform.DOScale(new Vector3(0, 0, 0), 0.1f).SetEase(Ease.InBounce).SetLoops(1);
