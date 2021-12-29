@@ -16,6 +16,7 @@ namespace Nasser.SBW
 
 
         Animator animator;
+        Collider[] _collider;
         private int animIsWalk;
         // Start is called before the first frame update
         void Start()
@@ -23,6 +24,7 @@ namespace Nasser.SBW
             animator = GetComponent<Animator>();
             animIsWalk = Animator.StringToHash("isWalk");
             myParent = transform.parent;
+            _collider = GetComponents<Collider>();
         }
 
         public void Interact()
@@ -40,6 +42,9 @@ namespace Nasser.SBW
                 business.Raise();
             else
                 boy.Raise();
+
+            _collider[0].enabled = false;
+            _collider[1].enabled = false;
         }
     }
 

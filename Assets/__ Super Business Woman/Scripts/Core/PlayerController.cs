@@ -34,6 +34,12 @@ namespace Nasser.SBW.Core
         [SerializeField] private GameEvent firstTouchEvent;
         private float currentSliderAmount;
 
+        [Header("Finsh")]
+        [SerializeField] private GameObject[] finishStepsLocation;
+
+        [Header("Win lose events ")]
+        [SerializeField] GameEvent winEvent;
+        [SerializeField] GameEvent loseEvent;
 
         private bool touching = false;
         private bool firstTouch = false;
@@ -59,8 +65,10 @@ namespace Nasser.SBW.Core
 
         WaitForSeconds waitFor50ms = new WaitForSeconds(.5f);
         WaitForSeconds waitFor150ms = new WaitForSeconds(1.5f);
+        WaitForSeconds waitFor500ms = new WaitForSeconds(5f);
         void Start()
         {
+
             //Initializations
             rb = GetComponent<Rigidbody>();
             animator = GetComponentInChildren<Animator>();
@@ -107,7 +115,7 @@ namespace Nasser.SBW.Core
                             initTouch = touch;
                         }
                     }
-                    else if (touch.phase == TouchPhase.Moved)       //if finger moves while touching the screen
+                    else if (touch.phase == TouchPhase.Moved)
                     {
                         float deltaX = initTouch.position.x - touch.position.x;
                         positionX -= deltaX * Time.deltaTime * speed * dir;
@@ -115,7 +123,7 @@ namespace Nasser.SBW.Core
                         transform.localPosition = new Vector3(positionY, positionX, 0f);
                         initTouch = touch;
                     }
-                    else if (touch.phase == TouchPhase.Ended)       //if finger releases the screen
+                    else if (touch.phase == TouchPhase.Ended)
                     {
                         initTouch = new Touch();
                         touching = false;
@@ -182,12 +190,12 @@ namespace Nasser.SBW.Core
 
         private void CheckForCurrentGirlVisual()
         {
-             tempTextureIndex = texureIndex;
-            if (currentSliderAmount < 25)
+            tempTextureIndex = texureIndex;
+            if (currentSliderAmount <= 25 && currentSliderAmount > 0)
                 texureIndex = 0;
-            else if (currentSliderAmount < 50 && currentSliderAmount > 25)
+            else if (currentSliderAmount <= 50 && currentSliderAmount > 25)
                 texureIndex = 1;
-            else if (currentSliderAmount < 75 && currentSliderAmount > 50)
+            else if (currentSliderAmount <= 75 && currentSliderAmount > 50)
                 texureIndex = 2;
             else if (currentSliderAmount <= 100 && currentSliderAmount > 75)
                 texureIndex = 3;
@@ -198,6 +206,31 @@ namespace Nasser.SBW.Core
                 VisualyUpdateRotaion();
                 PlayEffect();
             }
+
+        }
+
+
+        public void CheckForEndStep()
+        {
+            if (currentSliderAmount <= 12.5 && currentSliderAmount > 0)
+                transform.DOMove(finishStepsLocation[0].transform.position, 1F).SetEase(Ease.InOutSine).OnComplete(Win);
+            else if (currentSliderAmount <= 25 && currentSliderAmount > 12.5)
+                transform.DOMove(finishStepsLocation[1].transform.position, 2F).SetEase(Ease.InOutSine).OnComplete(Win);
+            else if (currentSliderAmount <= 37.5 && currentSliderAmount > 25)
+                transform.DOMove(finishStepsLocation[2].transform.position, 3F).SetEase(Ease.InOutSine).OnComplete(Win);
+            else if (currentSliderAmount <= 50 && currentSliderAmount > 37.5)
+                transform.DOMove(finishStepsLocation[3].transform.position, 4F).SetEase(Ease.InOutSine).OnComplete(Win);
+            else if (currentSliderAmount <= 62.5 && currentSliderAmount > 50)
+                transform.DOMove(finishStepsLocation[4].transform.position, 5F).SetEase(Ease.InOutSine).OnComplete(Win);
+            else if (currentSliderAmount <= 75 && currentSliderAmount > 62.5)
+                transform.DOMove(finishStepsLocation[5].transform.position, 6F).SetEase(Ease.InOutSine).OnComplete(Win);
+            else if (currentSliderAmount <= 87.5 && currentSliderAmount > 75)
+                transform.DOMove(finishStepsLocation[6].transform.position, 7F).SetEase(Ease.InOutSine).OnComplete(Win);
+            else if (currentSliderAmount <= 100 && currentSliderAmount > 87.5)
+                transform.DOMove(finishStepsLocation[7].transform.position, 10F).SetEase(Ease.InOutSine).OnComplete(Win);
+
+            else
+                transform.DOMove(finishStepsLocation[8].transform.position, 10F).SetEase(Ease.InOutSine).OnComplete(Lose);
 
         }
         private void UpdateSlider()
@@ -211,7 +244,7 @@ namespace Nasser.SBW.Core
         public void Add5Points()
         {
             if (currentSliderAmount < 100)
-                currentSliderAmount += 2;
+                currentSliderAmount += 3.5f;
             else
                 currentSliderAmount = 100;
             UpdateSlider();
@@ -220,7 +253,7 @@ namespace Nasser.SBW.Core
         public void Add10Points()
         {
             if (currentSliderAmount < 100)
-                currentSliderAmount += 5;
+                currentSliderAmount += 7;
             else
                 currentSliderAmount = 100;
             UpdateSlider();
@@ -229,7 +262,7 @@ namespace Nasser.SBW.Core
         public void Sub5Points()
         {
             if (currentSliderAmount > 0)
-                currentSliderAmount -= 2;
+                currentSliderAmount -= 3.5f;
             else
                 currentSliderAmount = 0;
             UpdateSlider();
@@ -238,16 +271,28 @@ namespace Nasser.SBW.Core
         public void Sub10Points()
         {
             if (currentSliderAmount > 0)
-                currentSliderAmount -= 5;
+                currentSliderAmount -= 7;
             else
                 currentSliderAmount = 0;
             UpdateSlider();
         }
 
-        public void win()
+        public void Win()
+        {
+            animator.SetBool(animIsWin, true);
+            StartCoroutine(CallWinOrLose(0));
+
+        }
+
+        public void Lose()
+        {
+            animator.SetBool(animIsLose, true);
+            StartCoroutine(CallWinOrLose(1));
+        }
+
+        public void ReachFinalStep()
         {
             pathFollower.speed = 0;
-            animator.SetBool(animIsWin, true);
             isWinBool = true;
         }
 
@@ -267,6 +312,17 @@ namespace Nasser.SBW.Core
         {
             yield return waitFor50ms;
             PlayEffect();
+        }
+
+        IEnumerator CallWinOrLose( int index)
+        {
+            yield return waitFor500ms;
+            if (index == 0)
+                winEvent.Raise();
+            else
+                loseEvent.Raise();
+             
+            
         }
 
 
