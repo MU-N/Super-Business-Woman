@@ -10,7 +10,7 @@ namespace Nasser.SBW.UI
     public class UiManager : MonoBehaviour
     {
         [Header("Ads")]
-        [SerializeField] AdsManager adsManager;
+       // [SerializeField] AdsManager adsManager;
 
         [Header("Hand First touch")]
         [SerializeField] GameObject startTouchPannel;
@@ -30,7 +30,7 @@ namespace Nasser.SBW.UI
             startTouchPannel.SetActive(true);
             winPannel.SetActive(false);
             losePannel.SetActive(false);
-            adsManager.PlayBannerAds();
+            //adsManager.PlayBannerAds();
             handImageStart = handImage.transform.position;
             handImage.transform.DOMove(handImageStart + handImageTraget, 1F).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
         }
@@ -40,12 +40,12 @@ namespace Nasser.SBW.UI
 
         public void OnLose()
         {
-            adsManager.PlayInterstitialAds();
+           // adsManager.PlayInterstitialAds();
         }
 
         public void OnReward()
         {
-            adsManager.PlayRewardedAds(OnDoubleCoins);
+          //  adsManager.PlayRewardedAds(OnDoubleCoins);
         }
 
         private void OnDoubleCoins()

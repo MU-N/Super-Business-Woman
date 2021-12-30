@@ -5,7 +5,7 @@ using UnityEngine.Advertisements;
 
 namespace Nasser.SBW
 {
-    public class AdsManager : MonoBehaviour, IUnityAdsListener
+    public class AdsManager : MonoBehaviour /*IUnityAdsListener*/
     {
 #if UNITY_IOS
 string gameId = "4520814";
@@ -17,10 +17,10 @@ string gameId = "4520814";
         WaitForSeconds waitFor1Second = new WaitForSeconds(1f);
 
 
-        void Start()
+       /* void Start()
         {
-            Advertisement.Initialize(gameId);
-            Advertisement.AddListener(this);
+           *//* Advertisement.Initialize(gameId);
+            Advertisement.AddListener(this);*//*
 
             PlayBannerAds();    
         }
@@ -99,7 +99,7 @@ string gameId = "4520814";
                 Debug.Log("Rewarded to player ");
                 onRewardedAdsSuccess.Invoke();  
             }
-        }
+        }*/
 
 
     }

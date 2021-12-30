@@ -16055,7 +16055,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1563264301}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Nasser.SBW.AdsManager, Assembly-CSharp
         m_MethodName: PlayInterstitialAds
         m_Mode: 1
@@ -17455,7 +17455,7 @@ Transform:
   m_Children:
   - {fileID: 102535961}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &986235839
 GameObject:
@@ -21819,7 +21819,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1235923199
 GameObject:
@@ -21891,7 +21891,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 4263dc34a3375254196cbc2e798d7b36, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4263dc34a3375254196cbc2e798d7b36, type: 3}
       propertyPath: m_LocalScale.x
@@ -23923,7 +23923,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1563264301}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Nasser.SBW.AdsManager, Assembly-CSharp
         m_MethodName: PlayInterstitialAds
         m_Mode: 1
@@ -29296,49 +29296,6 @@ Transform:
   m_Father: {fileID: 1700845778}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1563264300
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1563264302}
-  - component: {fileID: 1563264301}
-  m_Layer: 0
-  m_Name: AdsManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1563264301
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1563264300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83533445f94c8824493a9df5d45054da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1563264302
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1563264300}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1563761101
 GameObject:
   m_ObjectHideFlags: 0
@@ -30311,7 +30268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4363df238439e8e4a8fc869614a22c33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adsManager: {fileID: 1563264301}
+  adsManager: {fileID: 0}
   startTouchPannel: {fileID: 1834050568}
   handImage: {fileID: 585785795}
   handImageTraget: {x: 550, y: 0, z: 0}
