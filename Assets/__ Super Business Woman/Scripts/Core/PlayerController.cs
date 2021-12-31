@@ -62,7 +62,7 @@ namespace Nasser.SBW.Core
         private Animator animator;
 
         private Touch initTouch = new Touch();
-
+        Touch touch;
         WaitForSeconds waitFor50ms = new WaitForSeconds(.5f);
         WaitForSeconds waitFor150ms = new WaitForSeconds(1.5f);
         WaitForSeconds waitFor500ms = new WaitForSeconds(5f);
@@ -98,11 +98,13 @@ namespace Nasser.SBW.Core
         {
             if (!isWinBool)
             {
-                foreach (Touch touch in Input.touches)
+                /*foreach (Touch touch in Input.touches)*/
+                if (Input.touchCount > 0)
                 {
-                    if (touch.phase == TouchPhase.Began)        //if finger touches the screen
+                    touch = Input.GetTouch(0);
+                    if (touch.phase == TouchPhase.Began)       
                     {
-                        if (!firstTouch)
+                        if (!firstTouch && touch.position.y < Screen.height - (Screen.height / 4))
                         {
                             pathFollower.speed = defultSpeed;
                             animator.SetBool(animIsWalking, true);
@@ -119,7 +121,7 @@ namespace Nasser.SBW.Core
                     {
                         float deltaX = initTouch.position.x - touch.position.x;
                         positionX -= deltaX * Time.deltaTime * speed * dir;
-                        positionX = Mathf.Clamp(positionX, -mapWidth, mapWidth);      //to set the boundaries of the player's position
+                        positionX = Mathf.Clamp(positionX, -mapWidth, mapWidth);      
                         transform.localPosition = new Vector3(positionY, positionX, 0f);
                         initTouch = touch;
                     }
@@ -131,11 +133,7 @@ namespace Nasser.SBW.Core
                 }
             }
 
-            //if you play on computer---------------------------------
-            float x = Input.GetAxis("Horizontal") * Time.deltaTime * computerSpeed;
-            Vector3 newPosition = rb.transform.localPosition + Vector3.right * x;
-            newPosition.x = Mathf.Clamp(newPosition.x, -mapWidth, mapWidth);
-            transform.localPosition = newPosition;
+
         }
 
 
@@ -144,7 +142,6 @@ namespace Nasser.SBW.Core
         {
 
             m_Renderer[0].material.SetTexture("_BaseMap", m_MainTexture[index]);
-            m_Renderer[1].material.SetTexture("_BaseMap", m_MainTexture[index]);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -197,8 +194,10 @@ namespace Nasser.SBW.Core
                 texureIndex = 1;
             else if (currentSliderAmount <= 75 && currentSliderAmount > 50)
                 texureIndex = 2;
-            else if (currentSliderAmount <= 100 && currentSliderAmount > 75)
+            else if (currentSliderAmount < 100 && currentSliderAmount > 75)
                 texureIndex = 3;
+            else if (currentSliderAmount >= 100)
+                texureIndex = 4;
 
             UpdateTexture(texureIndex);
             if (tempTextureIndex != texureIndex)
@@ -213,24 +212,24 @@ namespace Nasser.SBW.Core
         public void CheckForEndStep()
         {
             if (currentSliderAmount <= 12.5 && currentSliderAmount > 0)
-                transform.DOMove(finishStepsLocation[0].transform.position, 1F).SetEase(Ease.InOutSine).OnComplete(Win);
+                transform.DOMove(finishStepsLocation[0].transform.position, 2f).SetEase(Ease.InOutSine).OnComplete(Win);
             else if (currentSliderAmount <= 25 && currentSliderAmount > 12.5)
-                transform.DOMove(finishStepsLocation[1].transform.position, 2F).SetEase(Ease.InOutSine).OnComplete(Win);
+                transform.DOMove(finishStepsLocation[1].transform.position, 2.5f).SetEase(Ease.InOutSine).OnComplete(Win);
             else if (currentSliderAmount <= 37.5 && currentSliderAmount > 25)
-                transform.DOMove(finishStepsLocation[2].transform.position, 3F).SetEase(Ease.InOutSine).OnComplete(Win);
+                transform.DOMove(finishStepsLocation[2].transform.position, 3f).SetEase(Ease.InOutSine).OnComplete(Win);
             else if (currentSliderAmount <= 50 && currentSliderAmount > 37.5)
-                transform.DOMove(finishStepsLocation[3].transform.position, 4F).SetEase(Ease.InOutSine).OnComplete(Win);
+                transform.DOMove(finishStepsLocation[3].transform.position, 3.5f).SetEase(Ease.InOutSine).OnComplete(Win);
             else if (currentSliderAmount <= 62.5 && currentSliderAmount > 50)
-                transform.DOMove(finishStepsLocation[4].transform.position, 5F).SetEase(Ease.InOutSine).OnComplete(Win);
+                transform.DOMove(finishStepsLocation[4].transform.position, 4f).SetEase(Ease.InOutSine).OnComplete(Win);
             else if (currentSliderAmount <= 75 && currentSliderAmount > 62.5)
-                transform.DOMove(finishStepsLocation[5].transform.position, 6F).SetEase(Ease.InOutSine).OnComplete(Win);
+                transform.DOMove(finishStepsLocation[5].transform.position, 4.5f).SetEase(Ease.InOutSine).OnComplete(Win);
             else if (currentSliderAmount <= 87.5 && currentSliderAmount > 75)
-                transform.DOMove(finishStepsLocation[6].transform.position, 7F).SetEase(Ease.InOutSine).OnComplete(Win);
+                transform.DOMove(finishStepsLocation[6].transform.position, 5f).SetEase(Ease.InOutSine).OnComplete(Win);
             else if (currentSliderAmount <= 100 && currentSliderAmount > 87.5)
-                transform.DOMove(finishStepsLocation[7].transform.position, 10F).SetEase(Ease.InOutSine).OnComplete(Win);
+                transform.DOMove(finishStepsLocation[7].transform.position, 7f).SetEase(Ease.InOutSine).OnComplete(Win);
 
             else
-                transform.DOMove(finishStepsLocation[8].transform.position, 10F).SetEase(Ease.InOutSine).OnComplete(Lose);
+                transform.DOMove(finishStepsLocation[8].transform.position, 1.5f).SetEase(Ease.InOutSine).OnComplete(Lose);
 
         }
         private void UpdateSlider()
@@ -279,6 +278,7 @@ namespace Nasser.SBW.Core
 
         public void Win()
         {
+            transform.position = transform.position;
             animator.SetBool(animIsWin, true);
             StartCoroutine(CallWinOrLose(0));
 
@@ -314,15 +314,15 @@ namespace Nasser.SBW.Core
             PlayEffect();
         }
 
-        IEnumerator CallWinOrLose( int index)
+        IEnumerator CallWinOrLose(int index)
         {
             yield return waitFor500ms;
             if (index == 0)
                 winEvent.Raise();
             else
                 loseEvent.Raise();
-             
-            
+
+
         }
 
 
