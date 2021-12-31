@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Nasser.SBW.Core;
+using MoreMountains.NiceVibrations;
 
 namespace Nasser.SBW
 {
@@ -29,6 +30,7 @@ namespace Nasser.SBW
 
         public void Interact()
         {
+            MMVibrationManager.Haptic(HapticTypes.LightImpact);
             if (followLocation.childCount > 0)
             {
                 followLocation.GetChild(0).gameObject.SetActive(false);

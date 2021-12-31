@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Nasser.SBW.Core;
+using MoreMountains.NiceVibrations;
 
 namespace Nasser.SBW
 {
@@ -15,6 +16,7 @@ namespace Nasser.SBW
         public void Interact()
         {
             reachFinish.Raise();
+            MMVibrationManager.Haptic(HapticTypes.MediumImpact);
             foreach (var item in _particleSystem)
             {
 
