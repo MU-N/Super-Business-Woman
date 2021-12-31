@@ -44,6 +44,7 @@ namespace Nasser.SBW.Core
         private bool touching = false;
         private bool firstTouch = false;
         private bool isWinBool = false;
+        private bool isSettingPannel = false;
 
 
         private float positionX, positionY;
@@ -104,7 +105,7 @@ namespace Nasser.SBW.Core
                     touch = Input.GetTouch(0);
                     if (touch.phase == TouchPhase.Began)       
                     {
-                        if (!firstTouch && touch.position.y < Screen.height - (Screen.height / 4))
+                        if (!firstTouch && touch.position.y < Screen.height - (Screen.height / 4) && !isSettingPannel)
                         {
                             pathFollower.speed = defultSpeed;
                             animator.SetBool(animIsWalking, true);
@@ -301,6 +302,11 @@ namespace Nasser.SBW.Core
             girlVisual.transform.DORotate(new Vector3(0, 360 + 90, 0), 1F, RotateMode.FastBeyond360).SetEase(Ease.InOutSine).SetLoops(1);
         }
 
+
+        public void SettingPanel ()
+        {
+            isSettingPannel = !isSettingPannel;
+        }
 
 
         IEnumerator WaitFor75ms()

@@ -16,6 +16,7 @@ namespace Nasser.SBW.UI
         [SerializeField] GameObject startTouchPannel;
         [SerializeField] GameObject handImage;
         [SerializeField] Vector3 handImageTraget;
+        [SerializeField] GameObject settingPanel;
 
         [Header("Win")]
         [SerializeField] GameObject winPannel;
@@ -24,12 +25,14 @@ namespace Nasser.SBW.UI
         [SerializeField] GameObject losePannel;
         Vector3 handImageStart;
         float coins = 5;
+
         private void Start()
         {
             Time.timeScale = 1;
             startTouchPannel.SetActive(true);
             winPannel.SetActive(false);
             losePannel.SetActive(false);
+            settingPanel.SetActive(false);
             //adsManager.PlayBannerAds();
             handImageStart = handImage.transform.position;
             handImage.transform.DOMove(handImageStart + handImageTraget, 1F).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
@@ -61,6 +64,8 @@ namespace Nasser.SBW.UI
         {
            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
         }
+
+       
 
 
     }

@@ -1,4 +1,3 @@
-using MoreMountains.NiceVibrations;
 using System;
 using System.Linq;
 using UnityEngine;
@@ -79,7 +78,6 @@ namespace Nasser.SBW.Core
                     musicMixer.audioMixer.SetFloat("SoundVol", 0);
                 else
                     musicMixer.audioMixer.SetFloat("SoundVol", -80);
-                MMVibrationManager.Haptic(HapticTypes.LightImpact);
             }
 
             else if (ind == 1)
@@ -88,7 +86,6 @@ namespace Nasser.SBW.Core
                     audioMixer.audioMixer.SetFloat("MusicVol", -15);
                 else
                     audioMixer.audioMixer.SetFloat("MusicVol", -80);
-                MMVibrationManager.Haptic(HapticTypes.LightImpact);
             }
         }
     }
