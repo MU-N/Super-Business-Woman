@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Nasser.SBW.Core;
 using DG.Tweening;
-using MoreMountains.NiceVibrations;
+//using MoreMountains.NiceVibrations;
 
 namespace Nasser.SBW
 {
@@ -23,7 +23,7 @@ namespace Nasser.SBW
         public void Interact()
         {
             downGrade.Raise();
-            MMVibrationManager.Haptic(HapticTypes.LightImpact);
+           // MMVibrationManager.Haptic(HapticTypes.LightImpact);
             transform.DOScale(transform.localScale * 2, 0.1f).SetEase(Ease.InOutBounce).SetLoops(1).OnComplete(() =>
             {
                 transform.DOScale(new Vector3(0, 0, 0), 0.1f).SetEase(Ease.InBounce).SetLoops(1);

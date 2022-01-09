@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Nasser.SBW.Core;
-using MoreMountains.NiceVibrations;
+//using MoreMountains.NiceVibrations;
 
 namespace Nasser.SBW
 {
@@ -11,7 +11,7 @@ namespace Nasser.SBW
         [SerializeField] GameEvent gameEvent;
         public void Interact()
         {
-            MMVibrationManager.Haptic(HapticTypes.LightImpact);
+           // MMVibrationManager.Haptic(HapticTypes.LightImpact);
             gameEvent.Raise();
         }
 

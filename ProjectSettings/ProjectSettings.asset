@@ -628,6 +628,7 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
+    1: MOREMOUNTAINS_NICEVIBRATIONS;MOREMOUNTAINS_FEEDBACKS;MOREMOUNTAINS_TOOLS
     7: MOREMOUNTAINS_NICEVIBRATIONS;DREAMTECK_SPLINES;MOREMOUNTAINS_FEEDBACKS;MOREMOUNTAINS_TOOLS
   additionalCompilerArguments: {}
   platformArchitecture: {}
