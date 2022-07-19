@@ -1,5 +1,5 @@
 # Super-Business-Woman
-clone for rolic hyper-casual Money Honey!
+clone for rollic hyper-casual Money Honey!
 
 Youtube
 https://www.youtube.com/watch?v=2D8-JHI1jEs
