@@ -1,5 +1,6 @@
 # Super-Business-Woman
-hyper-casual prototype for Super Business Woman game
+clone for rolic hyper-casual Money Honey!
+https://play.google.com/store/apps/details?hl=en&id=com.muhammedersoy.moneydaddy3d
 
 
 
